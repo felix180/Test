@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.lang.annotation.Documented;
 
 @RestController
-public class MotanteController {
+public class MutanteController {
 
     @RequestMapping(value = "/test",method = RequestMethod.POST)
     public String test(){
