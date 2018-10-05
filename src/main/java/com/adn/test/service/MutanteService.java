@@ -47,7 +47,7 @@ public class MutanteService {
             }
 
         }
-        examenRepository.save(new Examen(Arrays.toString(dna), true));
+        examenRepository.save(new Examen(Arrays.toString(dna), Boolean.FALSE));
         return false ;
     }
 
@@ -74,11 +74,13 @@ public class MutanteService {
 
     public EstadisticaDTO getEstadisticas() {
         EstadisticaDTO estadisticaDTO = new EstadisticaDTO();
-        Long total = examenRepository.count();
+
         Examen busqueda = new Examen();
         busqueda.setMutante(Boolean.TRUE);
         Long mutantes = examenRepository.count(Example.of(busqueda));
-        estadisticaDTO.setCount_human_dna((int) Math.abs(total - mutantes));
+        busqueda.setMutante(Boolean.FALSE);
+        Long humanos = examenRepository.count(Example.of(busqueda));
+        estadisticaDTO.setCount_human_dna(humanos.intValue());
         estadisticaDTO.setCount_mutant_dna(mutantes.intValue());
         return estadisticaDTO;
     }

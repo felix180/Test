@@ -3,7 +3,7 @@ package com.adn.test.dto;
 public class EstadisticaDTO {
     private Integer count_mutant_dna;
     private Integer count_human_dna;
-    private Long ratio;
+    private Double ratio;
 
     public Integer getCount_mutant_dna() {
         return count_mutant_dna;
@@ -21,17 +21,17 @@ public class EstadisticaDTO {
         this.count_human_dna = count_human_dna;
     }
 
-    public Long getRatio() {
+    public Double getRatio() {
         if (count_human_dna == 0) {
-            return 1L;
+            return 1D;
         } else if (count_mutant_dna == 0) {
-            return 0L;
+            return 0D;
         } else {
-            return (long) count_mutant_dna / (long) count_human_dna;
+            return new Double(count_mutant_dna) / new Double(count_human_dna);
         }
     }
 
-    public void setRatio(Long ratio) {
+    public void setRatio(Double ratio) {
         this.ratio = ratio;
     }
 }
