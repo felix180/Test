@@ -1,9 +1,18 @@
 package com.adn.test.service;
 
+import com.adn.test.dao.ExamenRepository;
+import com.adn.test.entity.Examen;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 @Service
 public class MutanteService {
+
+    @Autowired
+    ExamenRepository examenRepository;
+
     public final IJ[] cordenadasDeB =
             {
                     new IJ( 0, 1 ), new IJ( 0, -1 ), new IJ( 1, 0 ), new IJ( -1, 0 ),
@@ -19,7 +28,6 @@ public class MutanteService {
         for (int i = 0;i<dna.length ;i++) {
             for (int j = 0; j < dna.length; j++) {
                 dna2d[i][j] = dna[i].substring(j,j+1);
-                System.out.println(dna[i]);
             }
 
         }
@@ -29,6 +37,7 @@ public class MutanteService {
                 for (IJ cordenada:cordenadasDeB) {
                     int count = 1;
                     if( busquedaPorCordenadas(i,j,cordenada,dna2d,count)){
+                        examenRepository.save(new Examen(Arrays.toString(dna), true));
                         return  true;
                     }
                 }
@@ -36,7 +45,7 @@ public class MutanteService {
             }
 
         }
-
+        examenRepository.save(new Examen(Arrays.toString(dna), true));
         return false ;
     }
 
@@ -52,9 +61,10 @@ public class MutanteService {
             count++;
 
         }
-        if (count >3)
+        if (count > 3) {
             return true;
-        System.out.println(count);
+        }
+
         return busquedaPorCordenadas(nuevaI,nuevaJ,cordenada,dna2d,count);
     }
 

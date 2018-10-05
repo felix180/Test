@@ -6,10 +6,12 @@ import org.jsondoc.core.annotation.*;
 import org.jsondoc.core.pojo.ApiStage;
 import org.jsondoc.core.pojo.ApiVisibility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -32,7 +34,6 @@ public class MutanteController {
     @ApiMethod(responsestatuscode ="203 - FORBIDDEN")
     @RequestMapping(value = "/mutant/", method = RequestMethod.POST)
     public  @ApiResponseObject ResponseEntity <Boolean> esMutante(@RequestBody @ApiBodyObject ConsultaMutanteDTO consultaMutanteDTO) {
-        String hola = "sd";
         try{
             return new ResponseEntity<>(
                     mutanteService.isMutant(consultaMutanteDTO.getDna()) , HttpStatus.OK);
