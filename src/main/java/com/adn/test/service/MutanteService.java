@@ -1,8 +1,10 @@
 package com.adn.test.service;
 
 import com.adn.test.dao.ExamenRepository;
+import com.adn.test.dto.EstadisticaDTO;
 import com.adn.test.entity.Examen;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -31,7 +33,7 @@ public class MutanteService {
             }
 
         }
-
+        System.out.println(Arrays.deepToString(dna2d));
         for (int i = 0;i<dna.length ;i++) {
             for (int j = 0; j < dna.length; j++) {
                 for (IJ cordenada:cordenadasDeB) {
@@ -55,17 +57,30 @@ public class MutanteService {
 
         String letra = dna2d[i][j];
         if(nuevaI <0  || nuevaJ <0 || nuevaI > dna2d.length -1|| nuevaJ >dna2d.length-1){
+            count = 0;
             return  false;
         }
         if(dna2d[nuevaI][nuevaJ].equals(letra)){
             count++;
-
+            if (count > 3)
+                return true;
+        } else {
+            return false;
         }
-        if (count > 3) {
-            return true;
-        }
+        System.out.println(count + "  letra:" + letra + "  posicion: i:" + i + " j:" + j);
 
         return busquedaPorCordenadas(nuevaI,nuevaJ,cordenada,dna2d,count);
+    }
+
+    public EstadisticaDTO getEstadisticas() {
+        EstadisticaDTO estadisticaDTO = new EstadisticaDTO();
+        Long total = examenRepository.count();
+        Examen busqueda = new Examen();
+        busqueda.setMutante(Boolean.TRUE);
+        Long mutantes = examenRepository.count(Example.of(busqueda));
+        estadisticaDTO.setCount_human_dna((int) Math.abs(total - mutantes));
+        estadisticaDTO.setCount_mutant_dna(mutantes.intValue());
+        return estadisticaDTO;
     }
 
     private  class IJ

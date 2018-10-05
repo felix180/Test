@@ -1,6 +1,7 @@
 package com.adn.test.controller;
 
 import com.adn.test.dto.ConsultaMutanteDTO;
+import com.adn.test.dto.EstadisticaDTO;
 import com.adn.test.service.MutanteService;
 import org.jsondoc.core.annotation.*;
 import org.jsondoc.core.pojo.ApiStage;
@@ -39,6 +40,19 @@ public class MutanteController {
                     mutanteService.isMutant(consultaMutanteDTO.getDna()) , HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>( HttpStatus.FORBIDDEN);
+        }
+
+    }
+
+    @ApiMethod(description = "Consulta estadisticas")
+    @RequestMapping(value = "/stats", method = RequestMethod.GET)
+    public @ApiResponseObject
+    ResponseEntity<EstadisticaDTO> estadistica() {
+        try {
+            return new ResponseEntity<EstadisticaDTO>(
+                    mutanteService.getEstadisticas(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
     }
