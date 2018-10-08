@@ -1,5 +1,5 @@
 # Test
-> Test para resulucion de problema comun .
+> Test con estadísticas y prueba .
 Prueba Online
 https://testmutante.herokuapp.com
 
