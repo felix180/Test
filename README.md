@@ -16,10 +16,12 @@
 ## Usage example
 
 Se crea una api para las pruebas y el facil uso deberia estar en el home que te redirecciona dependiendo del property 
+```
 jsondoc.basePath=https://testmutante.herokuapp.com
 #jsondoc.basePath=http://localhost:8080
 #jsondoc.url=http://localhost:8080/jsondoc
 jsondoc.url=https://testmutante.herokuapp.com/jsondoc
+```
 
 Estaditisticas
 http://localhost:8080/stats
