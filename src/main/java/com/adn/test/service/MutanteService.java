@@ -15,16 +15,21 @@ public class MutanteService {
     @Autowired
     ExamenRepository examenRepository;
 
+    /**
+     * Posibilidades  dentro de la matrix
+     */
     public final IJ[] cordenadasDeB =
             {
                     new IJ( 0, 1 ), new IJ( 0, -1 ), new IJ( 1, 0 ), new IJ( -1, 0 ),
                     new IJ( 1, 1 ), new IJ( 1, -1 ), new IJ( -1, 1 ), new IJ( -1, -1 )
             };
 
+    /**
+     * Metodo que valida si es humano o mutante
+     * @param dna
+     * @return
+     */
     public  Boolean isMutant(String[] dna){
-
-
-
 
         String dna2d [][] = new String[dna.length][dna.length];
         for (int i = 0;i<dna.length ;i++) {
@@ -51,6 +56,15 @@ public class MutanteService {
         return false ;
     }
 
+    /**
+     * Buscador y a que direccion se tiene que dirigir  desde un punto dado
+     * @param i  posicion
+     * @param j posicion
+     * @param cordenada direccion de busqueda
+     * @param dna2d matrix
+     * @param count contador
+     * @return
+     */
     private  boolean  busquedaPorCordenadas(int i, int j, IJ cordenada, String[][] dna2d, int count) {
         int nuevaI =cordenada.i+i;
         int nuevaJ =cordenada.j+j;
@@ -72,6 +86,10 @@ public class MutanteService {
         return busquedaPorCordenadas(nuevaI,nuevaJ,cordenada,dna2d,count);
     }
 
+    /**
+     * Metodo que busca las estadisticas con sus count  y comparacion
+     * @return
+     */
     public EstadisticaDTO getEstadisticas() {
         EstadisticaDTO estadisticaDTO = new EstadisticaDTO();
 
@@ -85,6 +103,9 @@ public class MutanteService {
         return estadisticaDTO;
     }
 
+    /**
+     * Clase para las cordenadas
+     */
     private  class IJ
     {
         int i, j;
