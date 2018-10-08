@@ -38,7 +38,6 @@ public class MutanteService {
             }
 
         }
-        System.out.println(Arrays.deepToString(dna2d));
         for (int i = 0;i<dna.length ;i++) {
             for (int j = 0; j < dna.length; j++) {
                 for (IJ cordenada:cordenadasDeB) {
@@ -81,7 +80,6 @@ public class MutanteService {
         } else {
             return false;
         }
-        System.out.println(count + "  letra:" + letra + "  posicion: i:" + i + " j:" + j);
 
         return busquedaPorCordenadas(nuevaI,nuevaJ,cordenada,dna2d,count);
     }
